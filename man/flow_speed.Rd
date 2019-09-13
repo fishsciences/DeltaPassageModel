@@ -9,7 +9,7 @@ flow_speed(Sac1_flow, reach)
 \arguments{
 \item{Sac1_flow}{Flow in Sac1 reach}
 
-\item{reach}{One of following reaches: GeoDCC, Sac1, Sac2, Verona_to_Sac}
+\item{reach}{GeoDCC, Sac1, Sac2, or Verona_to_Sac}
 }
 \description{
 Calculates migration speed (km/day) as a function of Sac1 flow (cfs)

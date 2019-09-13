@@ -4,7 +4,7 @@
 #'
 #' @md
 #' @param Sac1_flow   Flow in Sac1 reach
-#' @param reach       One of following reaches: GeoDCC, Sac1, Sac2, Verona_to_Sac
+#' @param reach       GeoDCC, Sac1, Sac2, or Verona_to_Sac
 #'
 #' @export
 #' @examples
