@@ -1,9 +1,9 @@
 #' Survival standard deviation
 #'
-#' Look-up tables for the standard deviation in survival for a given standardized flow.
-#' Tables are used to apply stochasticity to survival in reaches that use a flow-survival relationship.
+#' Interpolation functions for the standard deviation in survival for a given standardized flow.
+#' Used to apply stochasticity to survival in reaches that use a flow-survival relationship.
 #'
-#' @format A list of 4 data frames with StandardizedFlow and SurvivalSD columns:
+#' @format A list of 4 interpolation functions with StandardizedFlow and SurvivalSD columns:
 #' \describe{
 #'   \item{Sac1}{Sacramento River from Freeport to junction with Sutter Slough.}
 #'   \item{Sac2}{Sacramento River from Sutter Slough junction to junction with Delta Cross Channel.}

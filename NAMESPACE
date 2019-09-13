@@ -3,4 +3,5 @@
 export(flow_speed)
 export(initialize_cohort)
 export(sim_cohort)
+export(travel_time)
 export(update_cohort)

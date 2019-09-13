@@ -4,7 +4,7 @@
 \alias{update_cohort}
 \title{Update cohort}
 \usage{
-update_cohort(cohort_list, reach, day, abundance, speed, survival)
+update_cohort(cohort_list, reach, day, abundance, travel_time, survival)
 }
 \arguments{
 \item{cohort_list}{List of cohort parameters}
@@ -15,9 +15,9 @@ update_cohort(cohort_list, reach, day, abundance, speed, survival)
 
 \item{abundance}{Number of fish in cohort}
 
-\item{speed}{Daily migration rate of cohort}
+\item{travel_time}{Travel time for cohort through reach}
 
-\item{survival}{Survival rate of cohort}
+\item{survival}{Survival rate of cohort through reach}
 }
 \description{
 Update list of cohort parameters

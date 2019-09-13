@@ -4,7 +4,7 @@
 \alias{initialize_cohort}
 \title{Initialize cohort}
 \usage{
-initialize_cohort(run, reach, day, abundance, speed, survival)
+initialize_cohort(run, reach, day, abundance, travel_time, survival)
 }
 \arguments{
 \item{run}{Chinook Salmon run}
@@ -15,9 +15,9 @@ initialize_cohort(run, reach, day, abundance, speed, survival)
 
 \item{abundance}{Number of fish in cohort}
 
-\item{speed}{Daily migration rate of cohort}
+\item{travel_time}{Travel time for cohort through reach}
 
-\item{survival}{Survival rate of cohort}
+\item{survival}{Survival rate of cohort through reach}
 }
 \description{
 Initialize list of cohort parameters

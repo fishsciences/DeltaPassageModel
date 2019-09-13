@@ -1,12 +1,12 @@
 Package: DeltaPassageModel
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Simulates Passage of Juvenile Chinook Salmon through the Delta
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Author: Bradley Cavallo, Paul Bergman, Steven Zeug, Jenny Melgo
+Maintainer: Travis Hinkelman <travis.hinkelman@fishsciences.net>
 Encoding: UTF-8
 LazyData: true
+Imports:
+    dplyr,
+    truncnorm
 RoxygenNote: 6.1.1

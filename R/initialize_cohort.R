@@ -7,20 +7,20 @@
 #' @param reach       Reach that cohort is entering
 #' @param day         Model day that cohort is entering reach
 #' @param abundance   Number of fish in cohort
-#' @param speed       Daily migration rate of cohort
-#' @param survival    Survival rate of cohort
+#' @param travel_time Travel time for cohort through reach
+#' @param survival    Survival rate of cohort through reach
 #'
 #' @export
 #' @examples
 #' initialize_cohort("Winter", "Sac1", 1, 1e6, 10, 0.8)
 #'
 
-initialize_cohort <- function(run, reach, day, abundance, speed, survival){
+initialize_cohort <- function(run, reach, day, abundance, travel_time, survival){
   list(Run = run,
        ReachVec = reach,
        DayVec = day,
        AbunVec = abundance,
-       SpeedVec = speed,
+       TravelTimeVec = travel_time,
        SurvVec = survival)
 }
 

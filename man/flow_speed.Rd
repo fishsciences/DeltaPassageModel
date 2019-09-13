@@ -4,19 +4,19 @@
 \alias{flow_speed}
 \title{Flow-speed relationship}
 \usage{
-flow_speed(Sac1_flow, reach)
+flow_speed(reach, flow)
 }
 \arguments{
-\item{Sac1_flow}{Flow in Sac1 reach}
-
 \item{reach}{GeoDCC, Sac1, Sac2, or Verona_to_Sac}
+
+\item{flow}{Flow on day entering reach}
 }
 \description{
-Calculates migration speed (km/day) as a function of Sac1 flow (cfs)
+Calculates migration speed (km/day) as a function of flow (cfs)
 }
 \examples{
-flow_speed(1e3, "Sac1")
-flow_speed(1e4, "Sac1")
-flow_speed(1e5, "Sac1")
-flow_speed(1e4, "GeoDCC")
+flow_speed("Sac1", 1e3)
+flow_speed("Sac1", 1e4)
+flow_speed("Sac1", 1e5)
+flow_speed("GeoDCC", 1e4)
 }

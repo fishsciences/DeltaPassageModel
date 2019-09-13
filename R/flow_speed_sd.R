@@ -1,7 +1,7 @@
 #' Migration speed standard deviation
 #'
-#' Look-up tables for the standard deviation in migration speed for a given flow (cfs).
-#' Tables are used to apply stochasticity to migration speed in reaches that use a flow-migration speed relationship.
+#' Interpolation functions for the standard deviation in migration speed for a given flow (cfs).
+#' Used to apply stochasticity to migration speed in reaches that use a flow-migration speed relationship.
 #'
 #' @format A list of 4 data frames with Flow and SpeedSD columns:
 #' \describe{
