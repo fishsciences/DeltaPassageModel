@@ -1,0 +1,13 @@
+#' Flow-survival parameters
+#'
+#' Statistical parameters for the flow-survival relationship.
+#'
+#' @format A list of named vectors (B0) for the following reaches:
+#' \describe{
+#'   \item{Sac1}{Sacramento River from Freeport to junction with Sutter Slough.}
+#'   \item{Sac2}{Sacramento River from Sutter Slough junction to junction with Delta Cross Channel.}
+#'   \item{Sac3}{Sacramento River from Delta Cross Channel junction to Rio Vista.}
+#'   \item{SS}{Combined reach of Sutter Slough and Steamboat Slough ending at Rio Vista.}
+#' }
+#'
+"flow_survival_params"

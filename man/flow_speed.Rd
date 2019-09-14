@@ -12,7 +12,8 @@ flow_speed(reach, flow)
 \item{flow}{Flow on day entering reach}
 }
 \description{
-Calculates migration speed (km/day) as a function of flow (cfs)
+Calculates migration speed (km/day) as a function of flow (cfs).
+Relationships can predict negative speeds but drawing from truncated distribution in travel_time() constrains values.
 }
 \examples{
 flow_speed("Sac1", 1e3)

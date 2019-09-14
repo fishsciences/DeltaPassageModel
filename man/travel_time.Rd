@@ -7,20 +7,19 @@
 travel_time(reach, scenario, model_day, flow_list)
 }
 \arguments{
-\item{reach}{GeoDCC, Sac1, Sac2, Sac3, Sac4, SS, or Verona_to_Sac}
+\item{reach}{GeoDCC, Sac1, Sac2, Sac3, Sac4, SS, Verona_to_Sac, Yolo, or Interior Delta}
 
 \item{scenario}{Scenario describing water project operations}
 
 \item{model_day}{Integer day in 82-yr model period}
 
 \item{flow_list}{List that contains flow values for all reaches, scenarios, and days in 82-yr model period}
-
-\item{reach}{}
 }
 \description{
 Draw random value for travel time through a reach on a given day.
 }
 \examples{
 travel_time("Sac1", "EXG", 2, list("Sac1" = list("EXG" = c(1000, 5000, 10000), "ALT" = c(2000, 10000, 20000))))
+travel_time("Yolo", "EXG", 2, list("Sac1" = list("EXG" = c(1000, 5000, 10000), "ALT" = c(2000, 10000, 20000))))
 
 }

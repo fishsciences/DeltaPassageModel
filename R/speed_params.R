@@ -1,0 +1,19 @@
+#' Migration speed parameters
+#'
+#' Mininimum, mean, and standard deviation of daily migration speed (km/day) for each reach.
+#' Missing values of mean and standard deviation indicate a flow-based relationship for that reach.
+#'
+#' @format A list of named vectors (min, mean, sd) for the following reaches:
+#' \describe{
+#'   \item{GeoDCC}{Combined reach of Georgiana Slough, Delta Cross Channel, and South and North Forks
+#'   of the Mokelumne River ending at confluence with the San Joaquin River.}
+#'   \item{Sac1}{Sacramento River from Freeport to junction with Sutter Slough.}
+#'   \item{Sac2}{Sacramento River from Sutter Slough junction to junction with Delta Cross Channel.}
+#'   \item{Sac3}{Sacramento River from Delta Cross Channel junction to Rio Vista.}
+#'   \item{Sac4}{Sacramento River from Rio Vista to Chipps Island.}
+#'   \item{SS}{Combined reach of Sutter Slough and Steamboat Slough ending at Rio Vista.}
+#'   \item{Verona_to_Sac}{Sacramento River from Verona to Freeport.}
+#'   \item{Interior Delta}{Begins at end of reaches GeoDCC or SJ2 or through Old River Junction (D) and ends at Chipps Island.}
+#' }
+#'
+"speed_params"

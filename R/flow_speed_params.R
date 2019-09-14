@@ -1,0 +1,14 @@
+#' Flow-speed parameters
+#'
+#' Statistical parameters for the flow-speed relationship.
+#'
+#' @format A list of named vectors (B0, B1) for the following reaches:
+#' \describe{
+#'   \item{GeoDCC}{Combined reach of Georgiana Slough, Delta Cross Channel, and South and North Forks
+#'   of the Mokelumne River ending at confluence with the San Joaquin River.}
+#'   \item{Sac1}{Sacramento River from Freeport to junction with Sutter Slough.}
+#'   \item{Sac2}{Sacramento River from Sutter Slough junction to junction with Delta Cross Channel.}
+#'   \item{Verona_to_Sac}{Sacramento River from Verona to Freeport.}
+#' }
+#'
+"flow_speed_params"
