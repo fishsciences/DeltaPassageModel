@@ -14,15 +14,11 @@
 #' travel_time("Yolo", "EXG", 2, list("Sac1" = list("EXG" = c(1000, 5000, 10000), "ALT" = c(2000, 10000, 20000))))
 #'
 
-#### use sac1 flow but not sac1 sd; maybe a mistake in GoldSim model
-#### my guess is that originally used flow from actual reach but changed to Sac1 reach only for flow-speed relationship and not sd extraction
-#### approach here is to use flow and sd from actual reach, but need to check with Steve
 travel_time <- function(reach, scenario, model_day, flow_list){
   if(!(reach %in% c(names(reach_length), "Interior Delta", "Yolo"))){
     stop("reach is not one of GeoDCC, Sac1, Sac2, Sac3, Sac4, SS, Verona_to_Sac, Yolo, Interior Delta")}
   sp <- speed_params[[reach]]
   if(reach %in% c("GeoDCC", "Sac1", "Sac2", "Verona_to_Sac")){
-    #Sac1_flow <- flow_list[["Sac1"]][[scenario]][model_day]
     reach_flow <- flow_list[[reach]][[scenario]][model_day]
     sp[["mean"]] <- flow_speed(reach, reach_flow)
     sp[["sd"]] <- flow_speed_sd[[reach]](reach_flow)

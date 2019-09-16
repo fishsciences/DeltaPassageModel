@@ -3,6 +3,7 @@
 export(flow_speed)
 export(flow_survival)
 export(initialize_cohort)
+export(routing)
 export(sim_cohort)
 export(survival)
 export(travel_time)
