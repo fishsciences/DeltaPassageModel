@@ -47,7 +47,11 @@ routing <- function(reach, scenario, model_day, flow_list){
   # Junction C
   if(reach == "Sac2"){
     temp <- flow_prop("GeoDCC", "Sac3", scenario, model_day, flow_list)
-    p_geo_dcc_mod <- 0.22 + 0.47 * temp[["GeoDCC"]]
+    if ("GeoDCC" %in% names(temp)){
+      p_geo_dcc_mod <- 0.22 + 0.47 * temp[["GeoDCC"]]
+    } else {  # no flow into GeoDCC so not included in flow_prop
+      p_geo_dcc_mod <- 0
+    }
     temp2 <- c("GeoDCC" = p_geo_dcc_mod, "Sac3" = 1 - p_geo_dcc_mod)
     out <- temp2[temp2 > 0]
   }

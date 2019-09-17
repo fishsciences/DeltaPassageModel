@@ -13,7 +13,6 @@
 #'
 #'
 
-
 sim_cohort <- function(abundance, scenario, model_day, flow_list){
 
   # initialize
