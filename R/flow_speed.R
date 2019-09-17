@@ -16,7 +16,7 @@
 
 flow_speed <- function(reach, flow){
   if(!(reach %in% c("GeoDCC", "Sac1", "Sac2", "Verona_to_Sac"))){
-    stop("Reach needs to be one of following: GeoDCC, Sac1, Sac2, Verona_to_Sac")
+    stop(paste(reach, "is not one of following: GeoDCC, Sac1, Sac2, Verona_to_Sac"))
   }
   # convert from cfs to cms and log transform
   log_flow = log(flow * 0.0283)

@@ -4,14 +4,15 @@
 \alias{update_cohort}
 \title{Update cohort}
 \usage{
-update_cohort(cohort_list, reach, day, abundance, travel_time, survival)
+update_cohort(cohort_list, reach, model_day, abundance, travel_time,
+  survival)
 }
 \arguments{
 \item{cohort_list}{List of cohort parameters}
 
 \item{reach}{Reach that cohort is entering}
 
-\item{day}{Model day that cohort is entering reach}
+\item{model_day}{Model day that cohort is entering reach}
 
 \item{abundance}{Number of fish in cohort}
 

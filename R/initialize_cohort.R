@@ -3,9 +3,8 @@
 #' Initialize list of cohort parameters
 #'
 #' @md
-#' @param run         Chinook Salmon run
 #' @param reach       Reach that cohort is entering
-#' @param day         Model day that cohort is entering reach
+#' @param model_day   Model day that cohort is entering reach
 #' @param abundance   Number of fish in cohort
 #' @param travel_time Travel time for cohort through reach
 #' @param survival    Survival rate of cohort through reach
@@ -15,10 +14,9 @@
 #' initialize_cohort("Winter", "Sac1", 1, 1e6, 10, 0.8)
 #'
 
-initialize_cohort <- function(run, reach, day, abundance, travel_time, survival){
-  list(Run = run,
-       ReachVec = reach,
-       DayVec = day,
+initialize_cohort <- function(reach, model_day, abundance, travel_time, survival){
+  list(ReachVec = reach,
+       ModelDayVec = model_day,
        AbunVec = abundance,
        TravelTimeVec = travel_time,
        SurvVec = survival)

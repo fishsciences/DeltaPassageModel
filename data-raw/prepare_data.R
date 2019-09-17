@@ -5,6 +5,12 @@ reach_length = c("GeoDCC" = 25.59, "Sac1" = 41.04, "Sac2" = 10.78, "Sac3" = 22.3
                  "SS" = 26.72, "Verona_to_Sac" = 37)
 usethis::use_data(reach_length, overwrite = TRUE)
 
+# Entry distributions (aka timing) ----------------------------------------------
+# flow_list = readRDS("FlowList.rds")
+#
+# entry <- read.csv("data-raw/EntryDistributions.csv", stringsAsFactors = FALSE) %>% mutate(Date = lubridate::ymd(Date))
+# library(ggplot2)
+# ggplot(entry, aes(x = Date, y = LateFall)) + geom_line()
 sac_timing <- read.csv("data-raw/SacTiming.csv", stringsAsFactors = FALSE)
 usethis::use_data(sac_timing, overwrite = TRUE)
 

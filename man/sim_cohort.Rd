@@ -4,21 +4,17 @@
 \alias{sim_cohort}
 \title{Simulate cohort}
 \usage{
-sim_cohort(run, day, reach, abundance)
+sim_cohort(abundance, scenario, model_day, flow_list)
 }
 \arguments{
-\item{run}{Chinook Salmon run}
-
-\item{day}{Model day that cohort is entering the model}
-
-\item{reach}{Reach where cohort enters the model}
-
 \item{abundance}{Number of fish in cohort when entering the model}
+
+\item{scenario}{Scenario describing water project operations}
+
+\item{model_day}{Integer day in 82-yr model period}
+
+\item{flow_list}{List that contains flow values for all reaches, scenarios, and days in 82-yr model period}
 }
 \description{
 Simulate cohort as it passes through the Delta
-}
-\examples{
-
-
 }

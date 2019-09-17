@@ -4,14 +4,12 @@
 \alias{initialize_cohort}
 \title{Initialize cohort}
 \usage{
-initialize_cohort(run, reach, day, abundance, travel_time, survival)
+initialize_cohort(reach, model_day, abundance, travel_time, survival)
 }
 \arguments{
-\item{run}{Chinook Salmon run}
-
 \item{reach}{Reach that cohort is entering}
 
-\item{day}{Model day that cohort is entering reach}
+\item{model_day}{Model day that cohort is entering reach}
 
 \item{abundance}{Number of fish in cohort}
 

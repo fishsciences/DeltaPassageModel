@@ -7,7 +7,7 @@
 routing(reach, scenario, model_day, flow_list)
 }
 \arguments{
-\item{reach}{GeoDCC, Sac1, Sac2, Sac3, Sac4, SS, Verona_to_Sac, Yolo, or Interior Delta}
+\item{reach}{GeoDCC, Sac1, Sac2, Sac3, Sac4, SS, Verona_to_Sac, Yolo, Fremont Weir, or Interior Delta}
 
 \item{scenario}{Scenario describing water project operations}
 

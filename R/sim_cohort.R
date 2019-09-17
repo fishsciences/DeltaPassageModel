@@ -3,18 +3,64 @@
 #' Simulate cohort as it passes through the Delta
 #'
 #' @md
-#' @param run         Chinook Salmon run
-#' @param reach       Reach where cohort enters the model
-#' @param day         Model day that cohort is entering the model
 #' @param abundance   Number of fish in cohort when entering the model
+#' @param scenario    Scenario describing water project operations
+#' @param model_day   Integer day in 82-yr model period
+#' @param flow_list   List that contains flow values for all reaches, scenarios, and days in 82-yr model period
+#'
 #'
 #' @export
-#' @examples
 #'
 #'
 
-sim_cohort <- function(run, day, reach, abundance){
 
+sim_cohort <- function(abundance, scenario, model_day, flow_list){
+
+  # initialize
+  cohort_id <- 1
+  active <- list()
+  inactive <- list()
+  # only entry point in this version is Fremont Weir
+  next_reaches <- routing("Fremont Weir", scenario, model_day, flow_list)
+  for (i in names(next_reaches)){
+    tt <- travel_time(i, scenario, model_day, flow_list)
+    surv <- survival(i, scenario, model_day, flow_list)
+    active[[as.character(cohort_id)]] <- initialize_cohort(i, model_day, abundance * next_reaches[[i]], tt, surv)
+    cohort_id <- cohort_id + 1
+  }
+
+  # move through Delta
+  while (length(active) > 0){
+    for (i in names(active)){
+      lv <- lapply(active[[i]], function(x) x[length(x)]) # lv = last values
+      md <- lv[["ModelDayVec"]] + lv[["TravelTimeVec"]]
+      md_floor <- floor(md)
+      abun <- lv[["AbunVec"]] * lv[["SurvVec"]]
+      next_reaches <- routing(lv[["ReachVec"]], scenario, md_floor, flow_list)
+      for (j in names(next_reaches)){
+        p = next_reaches[[j]]
+        if(j %in% c("GeoDCC", "SS", "Salvage")){
+          i_new <- as.character(cohort_id)
+          cohort_id <- cohort_id + 1
+        } else {
+          i_new <- i
+        }
+        if(j %in% c("Chipps Island", "Salvage")){
+          inactive[[i_new]] <- update_cohort(active[[i]], j, md, abun * p, NA, NA)
+        } else {
+          active[[i_new]] <- update_cohort(active[[i]], j, md, abun * p,
+                                           travel_time(j, scenario, md_floor, flow_list),
+                                           survival(j, scenario, md_floor, flow_list))
+        }
+        if(j == "Chipps Island"){
+          active[[i]] <- NULL  # remove cohort from active list after it arrives at Chipps Island (moved to inactive list above)
+        } else if(p == 1 & i_new != i){
+          active[[i]] <- NULL  # if whole cohort routed into GeoDCC, SS or Salvage, then remove 'original' cohort
+        } else {
+          # do nothing
+        }
+      }
+    }
+  }
+  return(inactive)
 }
-
-

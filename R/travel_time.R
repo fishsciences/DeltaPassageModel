@@ -16,17 +16,22 @@
 
 travel_time <- function(reach, scenario, model_day, flow_list){
   if(!(reach %in% c(names(reach_length), "Interior Delta", "Yolo"))){
-    stop("reach is not one of GeoDCC, Sac1, Sac2, Sac3, Sac4, SS, Verona_to_Sac, Yolo, Interior Delta")}
-  sp <- speed_params[[reach]]
-  if(reach %in% c("GeoDCC", "Sac1", "Sac2", "Verona_to_Sac")){
-    reach_flow <- flow_list[[reach]][[scenario]][model_day]
-    sp[["mean"]] <- flow_speed(reach, reach_flow)
-    sp[["sd"]] <- flow_speed_sd[[reach]](reach_flow)
-  }
+    stop(paste(reach, "is not one of GeoDCC, Sac1, Sac2, Sac3, Sac4, SS, Verona_to_Sac, Yolo, Interior Delta"))}
   if(reach == "Yolo") {
     return(runif(1, 4, 28))  # warning: hard-coded values
-  } else {
-    return(reach_length[[reach]]/truncnorm::rtruncnorm(1, sp[["min"]], 1e10, sp[["mean"]], sp[["sd"]]))
+  }else{
+    sp <- speed_params[[reach]]
+    if(reach == "Interior Delta"){
+      # Interior Delta is returning travel time
+      return(truncnorm::rtruncnorm(1, sp[["min"]], 1e10, sp[["mean"]], sp[["sd"]]))
+    }else{
+      if(reach %in% c("GeoDCC", "Sac1", "Sac2", "Verona_to_Sac")){
+        reach_flow <- flow_list[[reach]][[scenario]][model_day]
+        sp[["mean"]] <- flow_speed(reach, reach_flow)
+        sp[["sd"]] <- flow_speed_sd[[reach]](reach_flow)
+      }
+      return(reach_length[[reach]]/truncnorm::rtruncnorm(1, sp[["min"]], 1e10, sp[["mean"]], sp[["sd"]]))
+    }
   }
 }
 
