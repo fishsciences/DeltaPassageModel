@@ -6,12 +6,18 @@ reach_length = c("GeoDCC" = 25.59, "Sac1" = 41.04, "Sac2" = 10.78, "Sac3" = 22.3
 usethis::use_data(reach_length, overwrite = TRUE)
 
 # Entry distributions (aka timing) ----------------------------------------------
-# flow_list = readRDS("FlowList.rds")
-#
-# entry <- read.csv("data-raw/EntryDistributions.csv", stringsAsFactors = FALSE) %>% mutate(Date = lubridate::ymd(Date))
-# library(ggplot2)
-# ggplot(entry, aes(x = Date, y = LateFall)) + geom_line()
-sac_timing <- read.csv("data-raw/SacTiming.csv", stringsAsFactors = FALSE)
+
+library(dplyr)
+lf <- read.csv("data-raw/LateFall_Timing.csv") %>%
+  select(Day, LateFall = Daily_P)
+sac_timing <- read.csv("data-raw/SacTiming.csv", stringsAsFactors = FALSE) %>%
+  mutate(Day = lubridate::yday(Date)) %>%
+  left_join(lf) %>%
+  # fill in missing values on December 31st of leap years
+  # arguably should be filling in February 29th but difference is probably negligible
+  mutate(LateFall = cfs.misc::fill_missing(LateFall)) %>% # fill_missing is slow
+  select(-Day) %>%
+  as.list()
 usethis::use_data(sac_timing, overwrite = TRUE)
 
 # Migration speed ----------------------------------------------
