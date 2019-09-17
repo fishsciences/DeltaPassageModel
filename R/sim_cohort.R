@@ -15,6 +15,7 @@
 
 sim_cohort <- function(abundance, scenario, model_day, flow_list){
 
+  md_max <- length(flow_list[["Sac1"]][["date"]]) # arbitrarily choosing reach; all reaches should have same length
   # initialize
   cohort_id <- 1
   active <- list()
@@ -35,28 +36,35 @@ sim_cohort <- function(abundance, scenario, model_day, flow_list){
       md <- lv[["ModelDayVec"]] + lv[["TravelTimeVec"]]
       md_floor <- floor(md)
       abun <- lv[["AbunVec"]] * lv[["SurvVec"]]
-      next_reaches <- routing(lv[["ReachVec"]], scenario, md_floor, flow_list)
-      for (j in names(next_reaches)){
-        p = next_reaches[[j]]
-        if(j %in% c("GeoDCC", "SS", "Salvage")){
-          i_new <- as.character(cohort_id)
-          cohort_id <- cohort_id + 1
-        } else {
-          i_new <- i
-        }
-        if(j %in% c("Chipps Island", "Salvage")){
-          inactive[[i_new]] <- update_cohort(active[[i]], j, md, abun * p, NA, NA)
-        } else {
-          active[[i_new]] <- update_cohort(active[[i]], j, md, abun * p,
-                                           travel_time(j, scenario, md_floor, flow_list),
-                                           survival(j, scenario, md_floor, flow_list))
-        }
-        if(j == "Chipps Island"){
-          active[[i]] <- NULL  # remove cohort from active list after it arrives at Chipps Island (moved to inactive list above)
-        } else if(p == 1 & i_new != i){
-          active[[i]] <- NULL  # if whole cohort routed into GeoDCC, SS or Salvage, then remove 'original' cohort
-        } else {
-          # do nothing
+      if(md_floor > md_max){
+        # cohort hasn't reached Chipps Island by end of available flow data
+        # move cohort to inactive list and remove it from active list
+        inactive[[i]] <- active[[i]]
+        active[[i]] <- NULL
+      } else {
+        next_reaches <- routing(lv[["ReachVec"]], scenario, md_floor, flow_list)
+        for (j in names(next_reaches)){
+          p = next_reaches[[j]]
+          if(j %in% c("GeoDCC", "SS", "Salvage")){
+            i_new <- as.character(cohort_id)
+            cohort_id <- cohort_id + 1
+          } else {
+            i_new <- i
+          }
+          if(j %in% c("Chipps Island", "Salvage")){
+            inactive[[i_new]] <- update_cohort(active[[i]], j, md, abun * p, NA, NA)
+          } else {
+            active[[i_new]] <- update_cohort(active[[i]], j, md, abun * p,
+                                             travel_time(j, scenario, md_floor, flow_list),
+                                             survival(j, scenario, md_floor, flow_list))
+          }
+          if(j == "Chipps Island"){
+            active[[i]] <- NULL  # remove cohort from active list after it arrives at Chipps Island (moved to inactive list above)
+          } else if(p == 1 & i_new != i){
+            active[[i]] <- NULL  # if whole cohort routed into GeoDCC, SS or Salvage, then remove 'original' cohort
+          } else {
+            # do nothing
+          }
         }
       }
     }
