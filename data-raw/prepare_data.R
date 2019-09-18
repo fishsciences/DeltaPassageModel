@@ -10,12 +10,15 @@ usethis::use_data(reach_length, overwrite = TRUE)
 library(dplyr)
 lf <- read.csv("data-raw/LateFall_Timing.csv") %>%
   select(Day, LateFall = Daily_P)
+# fill in value for December 31st of leap years
+# arguably should be filling in February 29th but difference is probably negligible
+lf_fill <- data.frame(Day = 366, LateFall = mean(c(lf$LateFall[1], lf$LateFall[365])))
+lf <- bind_rows(lf, lf_fill) %>%
+  mutate(LateFall = LateFall/sum(LateFall))
+
 sac_timing <- read.csv("data-raw/SacTiming.csv", stringsAsFactors = FALSE) %>%
   mutate(Day = lubridate::yday(Date)) %>%
   left_join(lf) %>%
-  # fill in missing values on December 31st of leap years
-  # arguably should be filling in February 29th but difference is probably negligible
-  mutate(LateFall = cfs.misc::fill_missing(LateFall)) %>% # fill_missing is slow
   select(-Day) %>%
   as.list()
 usethis::use_data(sac_timing, overwrite = TRUE)
