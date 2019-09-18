@@ -69,5 +69,11 @@ sim_cohort <- function(abundance, scenario, model_day, flow_list){
       }
     }
   }
-  return(inactive)
+  # initially returned inactive list but the resulting objects were fairly large
+  # moreover, the details contained in those objects are unlikely to be included in any summaries
+  results = unique(do.call("rbind", lapply(inactive, as.data.frame)))
+  results_agg = aggregate(AbunVec ~ ReachVec, results, sum)
+  names(results_agg) = c("Reach", "Abundance")
+  results_agg = results_agg[order(results_agg$Abundance, decreasing = TRUE),]
+  return(results_agg)
 }
