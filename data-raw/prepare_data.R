@@ -8,11 +8,12 @@ usethis::use_data(reach_length, overwrite = TRUE)
 # Entry distributions (aka timing) ----------------------------------------------
 
 library(dplyr)
-lf <- read.csv("data-raw/LateFall_Timing.csv") %>%
-  select(Day, LateFall = Daily_P)
-# fill in value for December 31st of leap years
+lf <- read.csv("data-raw/EntryDistributions.csv") %>%
+  mutate(Day = lubridate::yday(Date)) %>%
+  select(Day, LateFall)
+# fill in value for leap years; filling in Day 274
 # arguably should be filling in February 29th but difference is probably negligible
-lf_fill <- data.frame(Day = 366, LateFall = mean(c(lf$LateFall[1], lf$LateFall[365])))
+lf_fill <- data.frame(Day = 274, LateFall = mean(c(lf$LateFall[273], lf$LateFall[275])))
 lf <- bind_rows(lf, lf_fill) %>%
   mutate(LateFall = LateFall/sum(LateFall))
 
