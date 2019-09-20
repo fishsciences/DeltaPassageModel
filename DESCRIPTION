@@ -7,6 +7,5 @@ Maintainer: Travis Hinkelman <travis.hinkelman@fishsciences.net>
 Encoding: UTF-8
 LazyData: true
 Imports:
-    dplyr,
     truncnorm
 RoxygenNote: 6.1.1
