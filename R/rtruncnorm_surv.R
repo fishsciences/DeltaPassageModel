@@ -11,5 +11,5 @@
 #'
 
 rtruncnorm_surv <- function(n, mean, sd){
-  truncnorm::rtruncnorm(1, 0, 1, mean, sd)
+  truncnorm::rtruncnorm(n, 0, 1, mean, sd)
 }
