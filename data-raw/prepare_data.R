@@ -1,5 +1,7 @@
 ## code to prepare datasets in this file
 
+library(tidyverse)
+
 # reach length in km
 reach_length = c("GeoDCC" = 25.59, "Sac1" = 41.04, "Sac2" = 10.78, "Sac3" = 22.37, "Sac4" = 23.98,
                  "SS" = 26.72, "Verona_to_Sac" = 37)
@@ -7,19 +9,18 @@ usethis::use_data(reach_length, overwrite = TRUE)
 
 # Entry distributions (aka timing) ----------------------------------------------
 
-library(dplyr)
-lf <- read.csv("data-raw/EntryDistributions.csv") %>%
+lf <- read_csv("data-raw/LF_density.csv") %>%
   mutate(Day = lubridate::yday(Date)) %>%
-  select(Day, LateFall)
-# fill in value for leap years; filling in Day 274
-# arguably should be filling in February 29th but difference is probably negligible
-lf_fill <- data.frame(Day = 274, LateFall = mean(c(lf$LateFall[273], lf$LateFall[275])))
-lf <- bind_rows(lf, lf_fill) %>%
-  mutate(LateFall = LateFall/sum(LateFall))
+  # model runs slower as number of cohorts increase
+  # plus, not realistic that fish would move through on every day of year
+  mutate(Daily_P = ifelse(Daily_P < 0.001, 0, Daily_P),
+         Daily_P = Daily_P/sum(Daily_P))
+
+sum(lf$Daily_P > 0)/nrow(lf)  # target value is around 50%; winter run timing used in DPM is 70% of year and spring/fall are 30%
 
 sac_timing <- read.csv("data-raw/SacTiming.csv", stringsAsFactors = FALSE) %>%
   mutate(Day = lubridate::yday(Date)) %>%
-  left_join(lf) %>%
+  left_join(select(lf, Day, LateFall = Daily_P)) %>%
   select(-Day) %>%
   as.list()
 usethis::use_data(sac_timing, overwrite = TRUE)
