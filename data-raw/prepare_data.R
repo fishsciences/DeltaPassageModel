@@ -9,23 +9,39 @@ usethis::use_data(reach_length, overwrite = TRUE)
 
 # Entry distributions (aka timing) ----------------------------------------------
 
-# late-fall was not included in sac_timing
-lf <- read_csv("data-raw/EntryDistributions.csv") %>%
+lf <- read_csv("data-raw/LF_density.csv") %>%
   mutate(Day = lubridate::yday(Date)) %>%
-  select(Day, LateFall) %>%
-  # fill in value for leap years; filling in Day 274
-  # arguably should be filling in February 29th but difference is probably negligible
-  bind_rows(data.frame(Day = 274, LateFall = NA)) %>%
-  arrange(Day) %>%
-  mutate(LateFall = cfs.misc::fill_missing(LateFall, 10),
-         LateFall = LateFall/sum(LateFall))
+  # model runs slower as number of cohorts increase
+  # plus, not realistic that fish would move through on every day of year
+  mutate(Daily_P = ifelse(Daily_P < 0.001, 0, Daily_P),
+         Daily_P = Daily_P/sum(Daily_P))
+
+sum(lf$Daily_P > 0)/nrow(lf)  # target value is around 50%; winter run timing used in DPM is 70% of year and spring/fall are 30%
 
 sac_timing <- read.csv("data-raw/SacTiming.csv", stringsAsFactors = FALSE) %>%
   mutate(Day = lubridate::yday(Date)) %>%
-  left_join(lf) %>%
+  left_join(select(lf, Day, LateFall = Daily_P)) %>%
   select(-Day) %>%
   as.list()
 usethis::use_data(sac_timing, overwrite = TRUE)
+
+# # late-fall timing did not match trawl data
+# lf_old <- read_csv("data-raw/EntryDistributions.csv") %>%
+#   mutate(Day = lubridate::yday(Date)) %>%
+#   select(Day, LateFall) %>%
+#   # fill in value for leap years; filling in Day 274
+#   # arguably should be filling in February 29th but difference is probably negligible
+#   bind_rows(data.frame(Day = 274, LateFall = NA)) %>%
+#   arrange(Day) %>%
+#   mutate(LateFall = cfs.misc::fill_missing(LateFall, 10),
+#          LateFall = LateFall/sum(LateFall))
+# ggplot(lf_old, aes(x = Day, y = LateFall)) + geom_line()
+#
+# # exploring possibility that old late-fall timing data was simply stored incorrectly (shifted dates)
+# ggplot(lf, aes(x = Day)) +
+#   geom_line(aes(y = Daily_P)) +
+#   geom_line(data = lf_old %>% mutate(Day = Day + 40, Day = ifelse(Day > 366, Day - 366, Day)), aes(y = LateFall), col = 2)
+
 
 # Migration speed ----------------------------------------------
 
