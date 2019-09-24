@@ -9,18 +9,20 @@ usethis::use_data(reach_length, overwrite = TRUE)
 
 # Entry distributions (aka timing) ----------------------------------------------
 
-lf <- read_csv("data-raw/LF_density.csv") %>%
+# late-fall was not included in sac_timing
+lf <- read_csv("data-raw/EntryDistributions.csv") %>%
   mutate(Day = lubridate::yday(Date)) %>%
-  # model runs slower as number of cohorts increase
-  # plus, not realistic that fish would move through on every day of year
-  mutate(Daily_P = ifelse(Daily_P < 0.001, 0, Daily_P),
-         Daily_P = Daily_P/sum(Daily_P))
-
-sum(lf$Daily_P > 0)/nrow(lf)  # target value is around 50%; winter run timing used in DPM is 70% of year and spring/fall are 30%
+  select(Day, LateFall) %>%
+  # fill in value for leap years; filling in Day 274
+  # arguably should be filling in February 29th but difference is probably negligible
+  bind_rows(data.frame(Day = 274, LateFall = NA)) %>%
+  arrange(Day) %>%
+  mutate(LateFall = cfs.misc::fill_missing(LateFall, 10),
+         LateFall = LateFall/sum(LateFall))
 
 sac_timing <- read.csv("data-raw/SacTiming.csv", stringsAsFactors = FALSE) %>%
   mutate(Day = lubridate::yday(Date)) %>%
-  left_join(select(lf, Day, LateFall = Daily_P)) %>%
+  left_join(lf) %>%
   select(-Day) %>%
   as.list()
 usethis::use_data(sac_timing, overwrite = TRUE)
