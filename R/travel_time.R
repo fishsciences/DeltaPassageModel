@@ -14,9 +14,10 @@
 #' travel_time("Yolo", "EXG", 2, list("Sac1" = list("EXG" = c(1000, 5000, 10000), "ALT" = c(2000, 10000, 20000))))
 #'
 
-travel_time <- function(reach, scenario, model_day, flow_list){
-  if(!(reach %in% c(names(reach_length), "Interior Delta", "Yolo"))){
-    stop(paste(reach, "is not one of GeoDCC, Sac1, Sac2, Sac3, Sac4, SS, Verona_to_Sac, Yolo, Interior Delta"))}
+travel_time <- function(reach = c("GeoDCC", "Sac1", "Sac2", "Sac3", "Sac4", "SS",
+                                  "Verona_to_Sac", "Interior Delta", "Yolo"),
+                        scenario, model_day, flow_list){
+  reach <- match.arg(reach)
   if(reach == "Yolo") {
     return(runif(1, 4, 28))  # warning: hard-coded values
   }else{

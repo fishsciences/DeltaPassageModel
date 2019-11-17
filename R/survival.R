@@ -14,10 +14,10 @@
 #' survival("Sac2", "EXG", 2, list("Sac3" = list("Standardized" = list("EXG" = c(-5, 0, 5)))))
 #'
 
-survival <- function(reach, scenario, model_day, flow_list){
-  if(!(reach %in% c(names(reach_length), "Interior Delta", "Yolo"))){
-    stop("reach is not one of GeoDCC, Sac1, Sac2, Sac3, Sac4, SS, Verona_to_Sac, Yolo, Interior Delta")
-  }
+survival <- function(reach = c("GeoDCC", "Sac1", "Sac2", "Sac3", "Sac4", "SS",
+                               "Verona_to_Sac", "Interior Delta", "Yolo"),
+                     scenario, model_day, flow_list){
+  reach <- match.arg(reach)
   sp <- survival_params[[reach]]
   if(reach %in% c("Sac1", "Sac2", "Sac3", "SS")){
     sac3_sf <- flow_list[["Sac3"]][["Standardized"]][[scenario]][model_day]

@@ -14,12 +14,10 @@
 #' flow_survival("SS", 0)
 #'
 
-flow_survival <- function(reach, flow){
-  if(!(reach %in% c("Sac1", "Sac2", "Sac3", "SS"))){
-    stop("Reach needs to be one of following: Sac1, Sac2, Sac3, or SS")
-  }
-  sac_slope = 0.52
-  p = flow_survival_params[[reach]]
+flow_survival <- function(reach = c("Sac1", "Sac2", "Sac3", "SS"), flow){
+  reach <- match.arg(reach)
+  sac_slope <- 0.52
+  p <- flow_survival_params[[reach]]
   exp(p[["B0"]] + sac_slope * flow)/(1 + exp(p[["B0"]] + sac_slope * flow))
 }
 

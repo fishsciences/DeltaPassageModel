@@ -3,7 +3,7 @@
 #' Draw random value for survival through the Interior Delta on a given day.
 #'
 #' @md
-#' @param n           GeoDCC, Sac1, Sac2, Sac3, Sac4, SS, Verona_to_Sac, Yolo, or Interior Delta
+#' @param n           Number of random values drawn
 #' @param scenario    Scenario describing water project operations
 #' @param model_day   Integer day in 82-yr model period
 #' @param flow_list   List that contains flow values for all reaches, scenarios, and days in 82-yr model period

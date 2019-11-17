@@ -14,13 +14,11 @@
 #' flow_speed("Sac1", 1e5)
 #' flow_speed("GeoDCC", 1e4)
 
-flow_speed <- function(reach, flow){
-  if(!(reach %in% c("GeoDCC", "Sac1", "Sac2", "Verona_to_Sac"))){
-    stop(paste(reach, "is not one of following: GeoDCC, Sac1, Sac2, Verona_to_Sac"))
-  }
+flow_speed <- function(reach = c("GeoDCC", "Sac1", "Sac2", "Verona_to_Sac"), flow){
+  reach <- match.arg(reach)
   # convert from cfs to cms and log transform
-  log_flow = log(flow * 0.0283)
-  p = flow_speed_params[[reach]]
+  log_flow <- log(flow * 0.0283)
+  p <- flow_speed_params[[reach]]
   p[["B1"]] * log_flow + p[["B0"]]
   # GoldSim model adjusted values below the min to min value
   # Here we use the calculated value with the potential implication that speeds might be slightly slower

@@ -4,7 +4,7 @@
 \alias{flow_survival}
 \title{Flow-survival relationship}
 \usage{
-flow_survival(reach, flow)
+flow_survival(reach = c("Sac1", "Sac2", "Sac3", "SS"), flow)
 }
 \arguments{
 \item{reach}{Sac1, Sac2, Sac3, or SS}

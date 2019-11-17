@@ -4,7 +4,13 @@
 \alias{travel_time}
 \title{Travel time}
 \usage{
-travel_time(reach, scenario, model_day, flow_list)
+travel_time(
+  reach = c("GeoDCC", "Sac1", "Sac2", "Sac3", "Sac4", "SS", "Verona_to_Sac",
+    "Interior Delta", "Yolo"),
+  scenario,
+  model_day,
+  flow_list
+)
 }
 \arguments{
 \item{reach}{GeoDCC, Sac1, Sac2, Sac3, Sac4, SS, Verona_to_Sac, Yolo, or Interior Delta}

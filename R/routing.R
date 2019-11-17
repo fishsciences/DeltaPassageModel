@@ -14,10 +14,10 @@
 #' routing("SS", "EXG", 2, list("SS" = list("EXG" = c(1000, 5000, 10000)), "Sac2" = list("EXG" = c(2000, 10000, 20000))))
 #'
 
-routing <- function(reach, scenario, model_day, flow_list){
-  if(!(reach %in% c(names(reach_length), "Fremont Weir", "Interior Delta", "Yolo"))){
-    stop("reach is not one of GeoDCC, Sac1, Sac2, Sac3, Sac4, SS, Verona_to_Sac, Fremont Weir, Yolo, Interior Delta")
-  }
+routing <- function(reach = c("GeoDCC", "Sac1", "Sac2", "Sac3", "Sac4", "SS",
+                              "Verona_to_Sac", "Fremont Weir", "Interior Delta", "Yolo"),
+                    scenario, model_day, flow_list){
+  reach <- match.arg(reach)
   flow_prop <- function(reach1, reach2, scenario, model_day, flow_list){
     flow_reach1 <- flow_list[[reach1]][[scenario]][model_day]
     flow_reach2 <- flow_list[[reach2]][[scenario]][model_day]

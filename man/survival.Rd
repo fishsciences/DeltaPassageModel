@@ -4,7 +4,13 @@
 \alias{survival}
 \title{Survival}
 \usage{
-survival(reach, scenario, model_day, flow_list)
+survival(
+  reach = c("GeoDCC", "Sac1", "Sac2", "Sac3", "Sac4", "SS", "Verona_to_Sac",
+    "Interior Delta", "Yolo"),
+  scenario,
+  model_day,
+  flow_list
+)
 }
 \arguments{
 \item{reach}{GeoDCC, Sac1, Sac2, Sac3, Sac4, SS, Verona_to_Sac, Yolo, or Interior Delta}

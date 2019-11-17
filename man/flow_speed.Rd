@@ -4,7 +4,7 @@
 \alias{flow_speed}
 \title{Flow-speed relationship}
 \usage{
-flow_speed(reach, flow)
+flow_speed(reach = c("GeoDCC", "Sac1", "Sac2", "Verona_to_Sac"), flow)
 }
 \arguments{
 \item{reach}{GeoDCC, Sac1, Sac2, or Verona_to_Sac}

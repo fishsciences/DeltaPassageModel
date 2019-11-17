@@ -7,7 +7,7 @@
 interior_delta_survival(n, scenario, model_day, flow_list)
 }
 \arguments{
-\item{n}{GeoDCC, Sac1, Sac2, Sac3, Sac4, SS, Verona_to_Sac, Yolo, or Interior Delta}
+\item{n}{Number of random values drawn}
 
 \item{scenario}{Scenario describing water project operations}
 

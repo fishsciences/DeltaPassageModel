@@ -4,8 +4,7 @@
 \alias{update_cohort}
 \title{Update cohort}
 \usage{
-update_cohort(cohort_list, reach, model_day, abundance, travel_time,
-  survival)
+update_cohort(cohort_list, reach, model_day, abundance, travel_time, survival)
 }
 \arguments{
 \item{cohort_list}{List of cohort parameters}

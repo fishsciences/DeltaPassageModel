@@ -4,7 +4,13 @@
 \alias{routing}
 \title{Routing}
 \usage{
-routing(reach, scenario, model_day, flow_list)
+routing(
+  reach = c("GeoDCC", "Sac1", "Sac2", "Sac3", "Sac4", "SS", "Verona_to_Sac",
+    "Fremont Weir", "Interior Delta", "Yolo"),
+  scenario,
+  model_day,
+  flow_list
+)
 }
 \arguments{
 \item{reach}{GeoDCC, Sac1, Sac2, Sac3, Sac4, SS, Verona_to_Sac, Yolo, Fremont Weir, or Interior Delta}
