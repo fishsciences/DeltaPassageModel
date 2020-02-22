@@ -7,5 +7,6 @@ Maintainer: Travis Hinkelman <travis.hinkelman@fishsciences.net>
 Encoding: UTF-8
 LazyData: true
 Imports:
-    truncnorm
+    truncnorm,
+    pkgnet
 RoxygenNote: 7.0.2
